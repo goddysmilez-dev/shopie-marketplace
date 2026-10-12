@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fb5b31">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Shopie Admin — Marketplace dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shop.css">
+  <script src="admin.js" defer></script>
+</head>
+<body class="admin-body">
+  <main id="admin-login" class="admin-login-shell">
+    <a class="brand admin-login-brand" href="index.html" aria-label="Shopie home"><span class="brand-mark">s<span>.</span></span><span class="brand-name">shopie</span></a>
+    <section class="admin-login-card" aria-labelledby="login-title">
+      <div class="admin-login-icon" aria-hidden="true">s<span>.</span></div>
+      <span class="section-kicker">SHOPIE MARKETPLACE</span>
+      <h1 id="login-title">Admin sign in<span class="heading-dot">.</span></h1>
+      <p class="admin-login-intro">Sign in with an authorised administrator account to manage the marketplace.</p>
+      <form class="dialog-form" id="admin-login-form">
+        <label class="form-field">Admin email<input name="email" type="email" autocomplete="username" required maxlength="254" placeholder="admin@example.com"></label>
+        <label class="form-field">Password<input name="password" type="password" autocomplete="current-password" required minlength="8" maxlength="128" placeholder="Your admin password"></label>
+        <p class="admin-alert" id="admin-login-error" role="alert" hidden></p>
+        <button class="button button-dark" id="admin-login-submit" type="submit">Sign in to dashboard <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="admin-login-note">Administrator accounts and permissions are managed securely on the server.</p>
+      <a class="admin-back-link" href="index.html">← Back to Shopie</a>
+    </section>
+  </main>
+
+  <div class="admin-app" id="admin-app" hidden>
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <a class="brand admin-brand" href="index.html" aria-label="Shopie home"><span class="brand-mark">s<span>.</span></span><span class="brand-name">shopie</span></a>
+      <span class="admin-side-label">WORKSPACE</span>
+      <nav class="admin-navigation" aria-label="Admin dashboard">
+        <button class="admin-nav-item active" type="button" data-section="overview" aria-current="page"><span>▦</span> Overview</button>
+        <button class="admin-nav-item" type="button" data-section="orders"><span>▤</span> Orders <span class="admin-nav-count" data-pending-count>—</span></button>
+        <button class="admin-nav-item" type="button" data-section="products"><span>▧</span> Products</button>
+        <button class="admin-nav-item" type="button" data-section="sellers"><span>♙</span> Sellers</button>
+      </nav>
+      <div class="admin-sidebar-footer">
+        <div class="admin-account-badge"><span class="admin-avatar" data-admin-initials>SA</span><span class="admin-account-copy"><strong data-admin-name>Administrator</strong><small>Shopie admin</small></span></div>
+        <button class="admin-logout" type="button" data-admin-logout>Sign out <span aria-hidden="true">↗</span></button>
+        <a class="admin-store-link" href="index.html">← Visit storefront</a>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <button class="admin-menu-toggle" id="admin-menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <div class="admin-breadcrumb"><span>Shopie</span><span aria-hidden="true">/</span><strong id="admin-breadcrumb-current">Overview</strong></div>
+        <div class="admin-topbar-right"><span class="admin-live-dot"></span><span>Marketplace live</span><span class="admin-topbar-divider"></span><span data-admin-email>Admin</span></div>
+      </header>
+
+      <main class="admin-content">
+        <div class="admin-page-heading">
+          <div><span class="section-kicker">YOUR MARKETPLACE, AT A GLANCE</span><h1 id="admin-page-title">Good morning<span class="heading-dot">.</span></h1><p id="admin-page-description">Here’s what’s happening on Shopie today.</p></div>
+          <button class="admin-refresh-button" id="admin-refresh" type="button"><span aria-hidden="true">↻</span> Refresh data</button>
+        </div>
+
+        <div class="admin-alert admin-page-alert" id="admin-dashboard-error" role="alert" hidden></div>
+        <div class="admin-toast" id="admin-toast" role="status" aria-live="polite" hidden></div>
+
+        <section class="admin-section-view active" data-view="overview" aria-labelledby="admin-page-title">
+          <div class="admin-stats-grid">
+            <article class="admin-stat-card"><span class="admin-stat-label">Gross sales</span><span class="admin-stat-icon stat-coral" aria-hidden="true">₦</span><strong class="admin-stat-value" data-metric="grossSales">—</strong><span class="admin-stat-foot">All-time paid orders</span></article>
+            <article class="admin-stat-card"><span class="admin-stat-label">Orders</span><span class="admin-stat-icon stat-lilac" aria-hidden="true">▤</span><strong class="admin-stat-value" data-metric="orders">—</strong><span class="admin-stat-foot">Orders received</span></article>
+            <article class="admin-stat-card"><span class="admin-stat-label">Customers</span><span class="admin-stat-icon stat-mint" aria-hidden="true">♙</span><strong class="admin-stat-value" data-metric="customers">—</strong><span class="admin-stat-foot">Registered customers</span></article>
+            <article class="admin-stat-card"><span class="admin-stat-label">Active sellers</span><span class="admin-stat-icon stat-yellow" aria-hidden="true">⌂</span><strong class="admin-stat-value" data-metric="sellers">—</strong><span class="admin-stat-foot">Approved seller accounts</span></article>
+          </div>
+
+          <div class="admin-overview-grid">
+            <section class="admin-panel">
+              <div class="admin-panel-heading"><div><h2>Latest orders</h2><p>Your most recent marketplace activity.</p></div><button class="admin-text-button" type="button" data-open-section="orders">All orders →</button></div>
+              <div class="admin-table-scroll"><table class="admin-table"><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th></tr></thead><tbody id="overview-orders"></tbody></table></div>
+            </section>
+            <section class="admin-panel admin-review-panel">
+              <div class="admin-panel-heading"><div><h2>Needs a look</h2><p>Things waiting for your review.</p></div><span class="admin-review-indicator" data-review-total>—</span></div>
+              <button class="admin-review-link" type="button" data-open-section="products"><span class="admin-review-symbol stat-coral">▧</span><span><strong>Products to review</strong><small data-review-products>—</small></span><span class="admin-review-arrow">→</span></button>
+              <button class="admin-review-link" type="button" data-open-section="sellers"><span class="admin-review-symbol stat-lilac">♙</span><span><strong>Seller applications</strong><small data-review-sellers>—</small></span><span class="admin-review-arrow">→</span></button>
+              <button class="admin-review-link" type="button" data-open-section="orders"><span class="admin-review-symbol stat-yellow">▤</span><span><strong>Orders to fulfil</strong><small data-review-orders>—</small></span><span class="admin-review-arrow">→</span></button>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-section-view" data-view="orders" aria-labelledby="admin-page-title" hidden>
+          <section class="admin-panel">
+            <div class="admin-panel-heading admin-table-heading"><div><h2>Marketplace orders</h2><p>Review orders and update fulfilment status.</p></div><label class="admin-table-search"><span aria-hidden="true">⌕</span><span class="sr-only">Search orders</span><input type="search" data-table-search="orders" placeholder="Search orders"></label></div>
+            <div class="admin-table-scroll"><table class="admin-table"><thead><tr><th>Order</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th>Update status</th></tr></thead><tbody id="orders-table"></tbody></table></div>
+            <p class="admin-empty" data-empty="orders" hidden>No orders to show yet.</p>
+          </section>
+        </section>
+
+        <section class="admin-section-view" data-view="products" aria-labelledby="admin-page-title" hidden>
+          <section class="admin-panel">
+            <div class="admin-panel-heading admin-table-heading"><div><h2>Product listings</h2><p>Review, approve or reject seller-submitted products.</p></div><label class="admin-table-search"><span aria-hidden="true">⌕</span><span class="sr-only">Search products</span><input type="search" data-table-search="products" placeholder="Search products"></label></div>
+            <div class="admin-table-scroll"><table class="admin-table"><thead><tr><th>Product</th><th>Seller</th><th>Category</th><th>Price</th><th>Status</th><th>Review</th></tr></thead><tbody id="products-table"></tbody></table></div>
+            <p class="admin-empty" data-empty="products" hidden>No product listings to show yet.</p>
+          </section>
+        </section>
+
+        <section class="admin-section-view" data-view="sellers" aria-labelledby="admin-page-title" hidden>
+          <section class="admin-panel">
+            <div class="admin-panel-heading admin-table-heading"><div><h2>Marketplace sellers</h2><p>Manage seller applications and shop access.</p></div><label class="admin-table-search"><span aria-hidden="true">⌕</span><span class="sr-only">Search sellers</span><input type="search" data-table-search="sellers" placeholder="Search sellers"></label></div>
+            <div class="admin-table-scroll"><table class="admin-table"><thead><tr><th>Business</th><th>Contact</th><th>Joined</th><th>Listings</th><th>Status</th><th>Review</th></tr></thead><tbody id="sellers-table"></tbody></table></div>
+            <p class="admin-empty" data-empty="sellers" hidden>No seller accounts to show yet.</p>
+          </section>
+        </section>
+        <footer class="admin-footer">Shopie Marketplace Admin <span>·</span> Handle customer and seller data with care.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
